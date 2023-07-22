@@ -9,4 +9,3 @@ curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.z
 
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
-

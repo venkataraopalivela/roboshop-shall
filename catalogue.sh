@@ -30,10 +30,10 @@ cd /app
 echo -e "\e[36m>>>>>>>>>> Download NodeJS Dependencies >>>>>>>>>>>\e[0m"
 npm install &>>/tmp/roboshop.log
 
-echo -e "\e[36m>>>>>>>>>> Install Mongo Client >>>>>>>>>>>\e[0m" tee -a /tmp/roboshop.log
+echo -e "\e[36m>>>>>>>>>> Install Mongo Client >>>>>>>>>>>\e[0m" | tee -a /tmp/roboshop.log
 yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
-echo -e "\e[36m>>>>>>>>>> Load Catalogue Schema >>>>>>>>>>>\e[0m" tee -a /tmp/roboshop.log
+echo -e "\e[36m>>>>>>>>>> Load Catalogue Schema >>>>>>>>>>>\e[0m" | tee -a /tmp/roboshop.log
 mongo --host mongodb.adevops14.online </app/schema/catalogue.js &>>/tmp/roboshop.log
 
 echo -e "\e[36m>>>>>>>>>> Start Catalogue Service >>>>>>>>>>>\e[0m" | tee -a /tmp/roboshop.log

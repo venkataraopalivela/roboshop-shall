@@ -1,6 +1,6 @@
 log=/tmp/roboshop.log
 
-func_apppreq()  {
+func_apppreq() {
     echo -e "\e[36m>>>>>>>>>> Create application users >>>>>>>>>>>\e[0m"
     useradd roboshop &>>${log}
 
@@ -19,7 +19,7 @@ func_apppreq()  {
     cd /app
 }
 
-func_systemd()  {
+func_systemd() {
   echo -e "\e[36m>>>>>>>>>> Start ${component} Service >>>>>>>>>>>\e[0m" | tee -a /tmp/roboshop.log
     systemctl daemon-reload &>>${log}
     systemctl enable ${component} &>>${log}

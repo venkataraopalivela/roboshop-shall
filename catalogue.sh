@@ -1,39 +1,39 @@
-echo ">>>>>>>>>> Create catalogue service file >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Create catalogue service file >>>>>>>>>>>\e[0m"
 cp catalogue.service /etc/systemd/system/catalogue.service
 
-echo ">>>>>>>>>> Create MongoDB Repo file >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Create MongoDB Repo file >>>>>>>>>>>\e[0m"
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 
-echo ">>>>>>>>>> Install NodeJS repos >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Install NodeJS repos >>>>>>>>>>>\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-echo ">>>>>>>>>> Install NodeJS >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Install NodeJS >>>>>>>>>>>\e[0m"
 yum install nodejs -y
 
-echo ">>>>>>>>>> Create application users >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Create application users >>>>>>>>>>>\e[0m"
 useradd roboshop
 
-echo ">>>>>>>>>> Create application directory >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Create application directory >>>>>>>>>>>\e[0m"
 mkdir /app
 
-echo ">>>>>>>>>> Download application content >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Download application content >>>>>>>>>>>\e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
 
-echo ">>>>>>>>>> Extract application content >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Extract application content >>>>>>>>>>>\e[0m"
 cd /app
 unzip /tmp/catalogue.zip
 cd /app
 
-echo ">>>>>>>>>> Download NodeJS Dependencies >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Download NodeJS Dependencies >>>>>>>>>>>\e[0m"
 npm install
 
-echo ">>>>>>>>>> Install Mongo Client >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Install Mongo Client >>>>>>>>>>>\e[0m"
 yum install mongodb-org-shell -y
 
-echo ">>>>>>>>>> Load Catalogue Schema >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Load Catalogue Schema >>>>>>>>>>>\e[0m"
 mongo --host mongodb.adevops14.online </app/schema/catalogue.js
 
-echo ">>>>>>>>>> Start Catalogue Service >>>>>>>>>>>"
+echo -e "\e[36m>>>>>>>>>> Start Catalogue Service >>>>>>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable catalogue
 systemctl restart catalogue

@@ -1,3 +1,5 @@
+log=/tmp/roboshop.log
+
 func_apppreq()  {
     echo -e "\e[36m>>>>>>>>>> Create application users >>>>>>>>>>>\e[0m"
     useradd roboshop &>>${log}
@@ -53,24 +55,23 @@ func_nodejs() {
 
 func_java() {
   echo -e "\e[36m>>>>>>>>>> Create ${component} service file >>>>>>>>>>>\e[0m"
-  cp ${component}.service /etc/systemd/system/${component}.service
+  cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
 
   echo -e "\e[36m>>>>>>>>>> Install Mavan >>>>>>>>>>>\e[0m"
-  yum install maven -y
+  yum install maven -y &>>${log}
 
-  echo -e "\e[36m>>>>>>>>>> Install application prerequasist>>>>>>>>>>>\e[0m"
   func_apppreq
 
   echo -e "\e[36m>>>>>>>>>> Build ${component} service  >>>>>>>>>>>\e[0m"
-  mvn clean package
-  mv target/${component}-1.0.jar ${component}.jar
+  mvn clean package &>>${log}
+  mv target/${component}-1.0.jar ${component}.jar &>>${log}
 
 
   echo -e "\e[36m>>>>>>>>>> Install MySQL client  >>>>>>>>>>>\e[0m"
-  yum install mysql -y
+  yum install mysql -y &>>${log}
 
   echo -e "\e[36m>>>>>>>>>> Load Schema  >>>>>>>>>>>\e[0m"
-  mysql -h mysql.adevops14.online -uroot -pRoboShop@1 < /app/schema/${component}.sql
+  mysql -h mysql.adevops14.online -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log}
 
   func_systemd
 }

@@ -58,6 +58,7 @@ func_java() {
   echo -e "\e[36m>>>>>>>>>> Install Mavan >>>>>>>>>>>\e[0m"
   yum install maven -y
 
+  echo -e "\e[36m>>>>>>>>>> Install application prerequasist>>>>>>>>>>>\e[0m"
   func_apppreq
 
   echo -e "\e[36m>>>>>>>>>> Build ${component} service  >>>>>>>>>>>\e[0m"

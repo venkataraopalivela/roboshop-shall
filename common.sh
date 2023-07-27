@@ -114,9 +114,11 @@ func_python() {
 
   echo -e "\e[36m>>>>>>>>>> Build ${component} service  >>>>>>>>>>>\e[0m"
   yum install python36 gcc python3-devel -y &>>${log}
-
-
   func_apppreq
+
+  func_exit_status
+
+
 
   sed -i "s/rabbitmq_app_password/${rabbitmq_app_password}/" /etc/systemd/system/${component}.service
 

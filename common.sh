@@ -1,6 +1,9 @@
 log=/tmp/roboshop.log
 
 func_apppreq() {
+    echo -e "\e[36m>>>>>>>>>> Create ${component} service file >>>>>>>>>>>\e[0m"
+    cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
+
     echo -e "\e[36m>>>>>>>>>> Create application users >>>>>>>>>>>\e[0m"
     useradd roboshop &>>${log}
 
@@ -27,8 +30,6 @@ func_systemd() {
 }
 func_nodejs() {
   log=/tmp/roboshop.log
-  echo -e "\e[36m>>>>>>>>>> Create ${component} service file >>>>>>>>>>>\e[0m"
-  cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
 
   echo -e "\e[36m>>>>>>>>>> Create MongoDB Repo file >>>>>>>>>>>\e[0m"
   cp mongo.repo /etc/yum.repos.d/mongo.repo &>>${log}
@@ -54,8 +55,6 @@ func_nodejs() {
 }
 
 func_java() {
-  echo -e "\e[36m>>>>>>>>>> Create ${component} service file >>>>>>>>>>>\e[0m"
-  cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
 
   echo -e "\e[36m>>>>>>>>>> Install Mavan >>>>>>>>>>>\e[0m"
   yum install maven -y &>>${log}
@@ -72,6 +71,19 @@ func_java() {
 
   echo -e "\e[36m>>>>>>>>>> Load Schema  >>>>>>>>>>>\e[0m"
   mysql -h mysql.adevops14.online -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log}
+
+  func_systemd
+}
+
+func_python() {
+
+  echo -e "\e[36m>>>>>>>>>> Build ${component} service  >>>>>>>>>>>\e[0m"
+  yum install python36 gcc python3-devel -y &>>${log}
+
+  func_apppreq
+
+  echo -e "\e[36m>>>>>>>>>> Build ${component} service  >>>>>>>>>>>\e[0m"
+  pip3.6 install -r requirements.txt &>>${log}
 
   func_systemd
 }

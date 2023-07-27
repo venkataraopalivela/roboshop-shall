@@ -114,7 +114,7 @@ func_python() {
 
   echo -e "\e[36m>>>>>>>>>> Build ${component} service  >>>>>>>>>>>\e[0m"
   yum install python36 gcc python3-devel -y &>>${log}
-  func_exit_status
+
 
   func_apppreq
 

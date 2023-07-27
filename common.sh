@@ -61,7 +61,11 @@ func_nodejs() {
 
   echo -e "\e[36m>>>>>>>>>> Create MongoDB Repo file >>>>>>>>>>>\e[0m"
   cp mongo.repo /etc/yum.repos.d/mongo.repo &>>${log}
-  echo $?
+  if [ $? -eq 0 ]; then
+    echo -e "\e[32m SUCCESS \e[0m"
+  else
+    echo -e "\e[31m FAILURE \e[0m"
+  fi
 
   echo -e "\e[36m>>>>>>>>>> Install NodeJS repos >>>>>>>>>>>\e[0m"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}

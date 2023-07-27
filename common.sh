@@ -22,7 +22,7 @@ func_apppreq() {
 
     echo -e "\e[36m>>>>>>>>>> Cleanup old application repos >>>>>>>>>>>\e[0m"
     rm -rf /app &>>${log}
-    func_exit_status
+
 
     echo -e "\e[36m>>>>>>>>>> Create application directory >>>>>>>>>>>\e[0m"
     mkdir /app &>>${log}
@@ -114,10 +114,8 @@ func_python() {
 
   echo -e "\e[36m>>>>>>>>>> Build ${component} service  >>>>>>>>>>>\e[0m"
   yum install python36 gcc python3-devel -y &>>${log}
-  func_apppreq
-
   func_exit_status
-
+  func_apppreq
 
 
   sed -i "s/rabbitmq_app_password/${rabbitmq_app_password}/" /etc/systemd/system/${component}.service

@@ -1,4 +1,4 @@
-component=python
+component=payment
 source common.sh
 rabbitmq_app_password=$1
 
